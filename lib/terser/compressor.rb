@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'sprockets/digest_utils'
 require 'sprockets/source_map_utils' if Gem::Version.new(Sprockets::VERSION) >= Gem::Version.new('4.x')
 
 class Terser
@@ -11,7 +10,7 @@ class Terser
     def initialize(options = {})
       options[:comments] ||= :none
       @options = options
-      @cache_key = -"Terser:#{::Terser::VERSION}:#{VERSION}:#{::Sprockets::DigestUtils.digest(options)}"
+      @cache_key = -"Terser:#{::Terser::VERSION}:#{VERSION}:#{options.to_s}"
       @terser = ::Terser.new(@options)
     end
 
